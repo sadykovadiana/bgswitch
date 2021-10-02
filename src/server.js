@@ -35,8 +35,7 @@ app.post('/upload', async (req, res, next) => {
         const { size } = file;
         const jpegFile = new Jpeg({size});
         await db.insert(jpegFile, file);
-
-        res.send(jpegFile.id);
+        res.send(jpegFile);
     } catch (error) {
         console.log(error);
         res.send('Error uploading a file');
