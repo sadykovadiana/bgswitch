@@ -22,15 +22,6 @@ module.exports = class Jpeg {
     await removeFile(path.resolve(uploadsFolder, this.originalFilename));
   }
 
-  toPublicJSON() {
-    return {
-      id: this.id,
-      originalUrl: `/files/${this.id}_original.jpeg`,
-      createdAt: this.createdAt,
-      size: this.size,
-    };
-  }
-
   toJSON() {
     return {
       id: this.id,

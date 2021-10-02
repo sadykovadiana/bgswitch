@@ -91,9 +91,6 @@ app.get('/merge', async (req, res) => {
         const colorToChange = color.split(',').map(el => Number(el));
         replaceBackground(frontPath, backPath, colorToChange, threshold).then(
             (readableStream) => {
-            // const writableStream = fs.createWriteStream(
-            //   path.resolve(__dirname, "./result/result.jpg")
-            // );
                 res.writeHead(200, { "Content-type": "image/jpeg" });
                 readableStream.pipe(res);
             }
