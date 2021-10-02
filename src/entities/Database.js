@@ -56,6 +56,19 @@ class Database extends EventEmitter {
 
   }
 
+  findOne(jpegId) {
+    const jpegRaw = this.idToJpeg[jpegId];
+
+    if (!jpegRaw) {
+      return null;
+    }
+
+    const { id, createdAt, size } = jpegRaw;
+    const jpeg = new Jpeg({id, createdAt, size});
+
+    return jpeg;
+  }
+
   find() {
     let allJpegs = Object.values(this.idToJpeg);
 

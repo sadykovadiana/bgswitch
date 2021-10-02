@@ -49,17 +49,13 @@ app.get('/list', (req, res) => {
 
 app.get('/image/:id', (req, res) => {
     const jpegId = req.params.id;
-    const jpegPath = path.join(uploadsFolder, `${jpegId}_original.jpeg`);
-
-    fs.readFile(jpegPath, function(err, content) {
-        if (err) {
-          res.writeHead(404, { "Content-type": "text/html" });
-          res.end("<h1>No such image</h1>");
-        } else {
-          res.writeHead(200, { "Content-type": "image/jpeg" });
-          res.end(content);
-        }
-    });
+    const jpeg = db.findOne(jpegId);
+    if (jpeg) {
+        res.sendFile(path.join(uploadsFolder, jpeg.originalFilename));
+    } else {
+        res.writeHead(404, { "Content-type": "text/html" });
+        res.end("<h1>No such image</h1>");
+    }
 });
 
 app.delete('/image/:id', async (req, res) => {
