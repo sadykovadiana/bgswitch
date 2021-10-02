@@ -45,7 +45,7 @@ app.post('/upload', async (req, res, next) => {
 
 app.get('/list', (req, res) => {
     const allJpegs = db.find().map((jpeg) => jpeg.toJSON());
-    return res.json({...allJpegs});
+    return res.json(allJpegs);
 });
 
 app.get('/image/:id', (req, res) => {
