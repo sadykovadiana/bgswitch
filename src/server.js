@@ -51,14 +51,13 @@ app.get('/list', (req, res) => {
 app.get('/image/:id', (req, res) => {
     const jpegId = req.params.id;
     const jpegPath = path.join(uploadsFolder, `${jpegId}_original.jpeg`);
-    //readFile(jpegPath)
+
     fs.readFile(jpegPath, function(err, content) {
         if (err) {
           res.writeHead(404, { "Content-type": "text/html" });
           res.end("<h1>No such image</h1>");
         } else {
-          //specify the content type in the response will be an image
-          res.writeHead(200, { "Content-type": "image/jpg" });
+          res.writeHead(200, { "Content-type": "image/jpeg" });
           res.end(content);
         }
     });
@@ -96,6 +95,7 @@ app.get('/merge', async (req, res) => {
             // const writableStream = fs.createWriteStream(
             //   path.resolve(__dirname, "./result/result.jpg")
             // );
+                res.writeHead(200, { "Content-type": "image/jpeg" });
                 readableStream.pipe(res);
             }
         ).catch(err => {
